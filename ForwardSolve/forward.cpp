@@ -3,6 +3,7 @@
 
 void Forward_Solve(const double theta[], double position[])
 {
+	//theta[3]归中位置为PI/2,因此theta[3]+=PI/2
 	double x = 81 + 172 * cos(theta[3]);
 	double y = 172 * sin(theta[3]);
 	double z = 0;

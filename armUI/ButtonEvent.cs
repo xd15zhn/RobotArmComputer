@@ -62,10 +62,10 @@ namespace armUI
         /*复位按钮按下事件，机械臂回到初始位置*/
         private void btnReset_Click(object sender, EventArgs e)
         {
-            trbServo[0].Value = 100;
+            trbServo[0].Value = 50;
             trbServo[1].Value = 50;
             trbServo[2].Value = 50;
-            trbServo[3].Value = 100;
+            trbServo[3].Value = 50;
             trbServo[4].Value = 50;
             trbServo[5].Value = 50;
             trbServo[6].Value = 50;
@@ -86,19 +86,7 @@ namespace armUI
         /*更新按钮按下事件，根据舵机rad角度计算舵机pwm位置*/
         private void button1_Click(object sender, EventArgs e)
         {
-            int val;
-            for (int i = 0; i < 8; i++)
-            {
-                val = 50;
-                try
-                {
-                    double temp = Limit(Convert.ToDouble(tbxServo[i].Text), -1.57, 1.57);
-                    val = (int)(temp / 0.0314159265 + 50);
-                }
-                catch (Exception) { };
-                trbServo[i].Value = val;
-                lblServo[i].Text = (trbServo[i].Value * 10 + 1000).ToString();
-            }
+            Servo_Update();
         }
         /*正解按钮按下事件，计算机械臂正运动学*/
         [DllImport("ForwardSolve.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -107,6 +95,7 @@ namespace armUI
         {
             double[] jointAngle = new double[4];
             double[] EndPos = new double[3];
+            Servo_Update();
             try
             {
                 jointAngle[0] = Limit(Convert.ToDouble(tbxServo[0].Text), -1.57, 1.57);
@@ -119,21 +108,61 @@ namespace armUI
             {
                 MessageBox.Show("Warning: ForwardSolve.dll not found!");
             }
-            catch (Exception) { };
+            catch (Exception) { EndPos[0] = EndPos[1] = EndPos[2] = 0; };
             textBox1.Text = EndPos[0].ToString("0.0000");
             textBox2.Text = EndPos[1].ToString("0.0000");
             textBox3.Text = EndPos[2].ToString("0.0000");
         }
-        private static double Limit(double num, double min, double max)
-        {
-            return num <= min ? (min) : (num >= max ? max : num);
-        }
         /*逆解按钮按下事件，计算机械臂逆运动学*/
-        [DllImport("ForwardSolve.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("InverseSolve.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern bool Inverse_Solve(double[] position, double[] theta);
         private void btnInverse_Click(object sender, EventArgs e)
         {
-
+            double[] jointAngle = new double[4];
+            double[] EndPos = new double[3];
+            try
+            {
+                EndPos[0]= Convert.ToDouble (textBox1.Text);
+                EndPos[1]=Convert.ToDouble  (textBox2.Text);
+                EndPos[2] = Convert.ToDouble(textBox3.Text);
+                if (!Inverse_Solve(EndPos, jointAngle))
+                    lblVersion.Text = "逆解不存在!";
+            }
+            catch (DllNotFoundException)
+            {
+                MessageBox.Show("Warning: InverseSolve.dll not found!");
+            }
+            catch (Exception) { jointAngle[0] = jointAngle[1] = jointAngle[2] = jointAngle[3] = 0; };
+            tbxServo[0].Text = jointAngle[0].ToString("0.0000");
+            tbxServo[1].Text = jointAngle[1].ToString("0.0000");
+            tbxServo[2].Text = jointAngle[2].ToString("0.0000");
+            tbxServo[3].Text = jointAngle[3].ToString("0.0000");
+            Servo_Update();
+        }
+        /*界面更新*/
+        private void Servo_Update()
+        {
+            int val;
+            for (int i = 0; i < 8; i++)
+            {
+                try
+                {
+                    double temp = Limit(Convert.ToDouble(tbxServo[i].Text), -1.57, 1.57);
+                    tbxServo[i].Text = temp.ToString();
+                    val = (int)(temp / 0.0314159265 + 50);
+                }
+                catch (Exception)
+                { 
+                    val = 50;
+                    tbxServo[i].Text = "0";
+                };
+                trbServo[i].Value = val;
+                lblServo[i].Text = (trbServo[i].Value * 10 + 1000).ToString();
+            }
+        }
+        private double Limit(double num, double min, double max)
+        {
+            return num <= min ? (min) : (num >= max ? max : num);
         }
     }
 }
