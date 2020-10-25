@@ -41,7 +41,7 @@ namespace armUI
                 tbxServo[i] = new TextBox
                 {
                     Name = $"tbxServo{i}",
-                    Text = "0",
+                    Text = "0.0000",
                     Location = new Point(475, 44 + 51 * i),
                     Size = new Size(100, 23),
                     Tag = i

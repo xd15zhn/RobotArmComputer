@@ -291,6 +291,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "0.0000";
             // 
             // textBox2
             // 
@@ -298,6 +299,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 14;
+            this.textBox2.Text = "0.0000";
             // 
             // textBox3
             // 
@@ -305,6 +307,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 14;
+            this.textBox3.Text = "0.0000";
             // 
             // label13
             // 
