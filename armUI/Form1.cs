@@ -29,6 +29,7 @@ namespace armUI
             cbxBaudRate1.Text = "38400";
             lblVersion.Text = version;
             Init_UI();
+            SerialPort1_Close();
         }
         private void btnOpen1_Click(object sender, EventArgs e)
         {
@@ -60,7 +61,6 @@ namespace armUI
             cbxPort1.Enabled = false;
             cbxBaudRate1.Enabled = false;
             lblVersion.Text = version;
-            tmrPortChk.Enabled = true;
             sp1Open = true;
         }
         /*关闭主串口后需要完成的一系列操作*/
@@ -72,10 +72,9 @@ namespace armUI
             cbxBaudRate1.Enabled = true;
             btnOpen1.Image = Properties.Resources.ledoff;
             btnOpen1.Text = "打开连接";
-            tmrPortChk.Enabled = false;
             sp1Open = false;
         }
-        /*定时每秒检测端口状况*/
+        /*定时检测端口状况*/
         private void tmrPortChk_Tick(object sender, EventArgs e)
         {
             string[] ports = SerialPort.GetPortNames();
@@ -102,6 +101,30 @@ namespace armUI
                     cbxPort1.Items.Add(port);
                 LastPorts = ports;
                 cbxPort1.Text = ports[0];  //默认选择第一个可用端口
+            }
+        }
+
+        private void btnSend1_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen) return;
+            Servo_Update();
+            byte[] DataToSend = new byte[10];
+            byte sum = 0x3C;
+            DataToSend[0] = 0x3C;
+            for (int i = 0; i < 8; i++)
+            {
+                DataToSend[i + 1] = (byte)trbServo[i].Value;
+                sum += DataToSend[i + 1];
+            }
+            DataToSend[9] = sum;
+            try
+            {
+                serialPort1.Write(DataToSend, 0, 10);
+            }
+            catch (Exception ex)
+            {
+                SerialPort1_Close();
+                lblVersion.Text = "串口发送失败!" + ex.Message;
             }
         }
     }

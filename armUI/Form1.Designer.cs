@@ -268,6 +268,7 @@
             this.btnSend1.TabIndex = 0;
             this.btnSend1.Text = "写入";
             this.btnSend1.UseVisualStyleBackColor = true;
+            this.btnSend1.Click += new System.EventHandler(this.btnSend1_Click);
             // 
             // button1
             // 
@@ -291,7 +292,7 @@
             // tmrPortChk
             // 
             this.tmrPortChk.Enabled = true;
-            this.tmrPortChk.Interval = 1000;
+            this.tmrPortChk.Interval = 200;
             this.tmrPortChk.Tick += new System.EventHandler(this.tmrPortChk_Tick);
             // 
             // textBox1
