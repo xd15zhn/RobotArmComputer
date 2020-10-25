@@ -26,9 +26,9 @@ bool Inverse_Solve(const double position[], double theta[])
 		if ((costheta >= -1) && (costheta <= 1))
 			break;
 		pitch += (pitch >= 0.78) ? 0.01 : -0.01;
-		if (pitch > 1.57)
+		if (pitch > 1.5708)
 			pitch = 0.77;
-		else if (pitch < -1.57) {
+		else if (pitch < -1.5708) {
 			theta[1] = theta[2] = theta[3] = 0;
 			return false;
 		}

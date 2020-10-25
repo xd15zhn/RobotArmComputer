@@ -98,10 +98,10 @@ namespace armUI
             Servo_Update();
             try
             {
-                jointAngle[0] = Limit(Convert.ToDouble(tbxServo[0].Text), -1.57, 1.57);
-                jointAngle[1] = Limit(Convert.ToDouble(tbxServo[1].Text), -1.57, 1.57);
-                jointAngle[2] = Limit(Convert.ToDouble(tbxServo[2].Text), -1.57, 1.57);
-                jointAngle[3] = Limit(Convert.ToDouble(tbxServo[3].Text), -1.57, 1.57);
+                jointAngle[0] = Limit(Convert.ToDouble(tbxServo[0].Text), -1.5708, 1.5708);
+                jointAngle[1] = Limit(Convert.ToDouble(tbxServo[1].Text), -1.5708, 1.5708);
+                jointAngle[2] = Limit(Convert.ToDouble(tbxServo[2].Text), -1.5708, 1.5708);
+                jointAngle[3] = Limit(Convert.ToDouble(tbxServo[3].Text), -1.5708, 1.5708);
                 Forward_Solve(jointAngle, EndPos);
             }
             catch (DllNotFoundException)
@@ -122,8 +122,8 @@ namespace armUI
             double[] EndPos = new double[3];
             try
             {
-                EndPos[0]= Convert.ToDouble (textBox1.Text);
-                EndPos[1]=Convert.ToDouble  (textBox2.Text);
+                EndPos[0] = Convert.ToDouble(textBox1.Text);
+                EndPos[1] = Convert.ToDouble(textBox2.Text);
                 EndPos[2] = Convert.ToDouble(textBox3.Text);
                 if (!Inverse_Solve(EndPos, jointAngle))
                     lblVersion.Text = "逆解不存在!";
@@ -139,6 +139,31 @@ namespace armUI
             tbxServo[3].Text = jointAngle[3].ToString("0.0000");
             Servo_Update();
         }
+
+        private void Timing_Send()
+        {
+            if (!cbxSend.Checked) return;
+            if (!serialPort1.IsOpen) return;
+            Servo_Update();
+            byte[] DataToSend = new byte[10];
+            byte sum = 0x3C;
+            DataToSend[0] = 0x3C;
+            for (int i = 0; i < 8; i++)
+            {
+                DataToSend[i + 1] = (byte)trbServo[i].Value;
+                sum += DataToSend[i + 1];
+            }
+            DataToSend[9] = sum;
+            try
+            {
+                serialPort1.Write(DataToSend, 0, 10);
+            }
+            catch (Exception ex)
+            {
+                SerialPort1_Close();
+                lblVersion.Text = "串口发送失败!" + ex.Message;
+            }
+        }
         /*界面更新*/
         private void Servo_Update()
         {
@@ -147,12 +172,12 @@ namespace armUI
             {
                 try
                 {
-                    double temp = Limit(Convert.ToDouble(tbxServo[i].Text), -1.57, 1.57);
+                    double temp = Limit(Convert.ToDouble(tbxServo[i].Text), -1.5708, 1.5708);
                     tbxServo[i].Text = temp.ToString();
-                    val = (int)(temp / 0.0314159265 + 50);
+                    val = (int)(temp / 0.0314159265 + 50.5);
                 }
                 catch (Exception)
-                { 
+                {
                     val = 50;
                     tbxServo[i].Text = "0";
                 };

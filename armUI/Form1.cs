@@ -14,7 +14,7 @@ namespace armUI
 {
     public partial class Form1 : Form
     {
-        private const string version = "Robot Arm V0.02";
+        private const string version = "Robot Arm V1.00";
         private string[] LastPorts = { };
         private bool sp1Open;
         private TrackBar[] trbServo = new TrackBar[8];
@@ -74,8 +74,7 @@ namespace armUI
             btnOpen1.Text = "打开连接";
             sp1Open = false;
         }
-        /*定时检测端口状况*/
-        private void tmrPortChk_Tick(object sender, EventArgs e)
+        private void Timing_PortCheck()
         {
             string[] ports = SerialPort.GetPortNames();
             if (ports.Length == 0)  //没有可用端口
@@ -103,29 +102,11 @@ namespace armUI
                 cbxPort1.Text = ports[0];  //默认选择第一个可用端口
             }
         }
-
-        private void btnSend1_Click(object sender, EventArgs e)
+        /*200ms定时任务:定时检测端口状况,定时发送舵机角度*/
+        private void tmr200ms_Tick(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen) return;
-            Servo_Update();
-            byte[] DataToSend = new byte[10];
-            byte sum = 0x3C;
-            DataToSend[0] = 0x3C;
-            for (int i = 0; i < 8; i++)
-            {
-                DataToSend[i + 1] = (byte)trbServo[i].Value;
-                sum += DataToSend[i + 1];
-            }
-            DataToSend[9] = sum;
-            try
-            {
-                serialPort1.Write(DataToSend, 0, 10);
-            }
-            catch (Exception ex)
-            {
-                SerialPort1_Close();
-                lblVersion.Text = "串口发送失败!" + ex.Message;
-            }
+            Timing_PortCheck();
+            Timing_Send();
         }
     }
 }
