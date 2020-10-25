@@ -14,42 +14,21 @@ namespace armUI
 {
     public partial class Form1 : Form
     {
-        private const string version = "Robot Arm V0.01";
+        private const string version = "Robot Arm V0.02";
         private string[] LastPorts = { };
         private bool sp1Open;
         private TrackBar[] trbServo = new TrackBar[8];
         private TextBox[] tbxServo = new TextBox[8];
+        private Label[] lblServo = new Label[8];
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                trbServo[i] = new TrackBar
-                {
-                    Name = $"trbServo{i}",
-                    Maximum = 100,
-                    Value = 50,
-                    Location = new Point(94, 41 + 51 * i),
-                    Size = new Size(334, 45),
-                    Tag = i 
-                };
-                trbServo[i].Scroll += new EventHandler(ServoVal_Change);
-                Controls.Add(trbServo[i]);
-                tbxServo[i] = new TextBox
-                {
-                    Name = $"tbxServo{i}",
-                    Text = "1500",
-                    Location = new Point(435, 44 + 51 * i),
-                    Size = new Size(100, 23),
-                    Tag = i 
-                };
-                Controls.Add(tbxServo[i]);
-            }
             cbxBaudRate1.Text = "38400";
             lblVersion.Text = version;
+            Init_UI();
         }
         private void btnOpen1_Click(object sender, EventArgs e)
         {
@@ -73,9 +52,7 @@ namespace armUI
                 lblVersion.Text = "串口打开失败!" + ex.Message;
             }
         }
-        /***********************
-         打开主串口后需要完成的一系列操作
-         **********************/
+        /*打开主串口后需要完成的一系列操作*/
         private void SerialPort1_Open()
         {
             btnOpen1.Image = Properties.Resources.ledon;
@@ -86,9 +63,7 @@ namespace armUI
             tmrPortChk.Enabled = true;
             sp1Open = true;
         }
-        /***********************
-         关闭主串口后需要完成的一系列操作
-         **********************/
+        /*关闭主串口后需要完成的一系列操作*/
         private void SerialPort1_Close()
         {
             if (serialPort1.IsOpen)
@@ -99,43 +74,6 @@ namespace armUI
             btnOpen1.Text = "打开连接";
             tmrPortChk.Enabled = false;
             sp1Open = false;
-        }
-        private void btnCenter_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                trbServo[i].Value = 50;
-                tbxServo[i].Text = "1500";
-            }
-        }
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                trbServo[i].Value = 50;
-                tbxServo[i].Text = (trbServo[i].Value * 10 + 1000).ToString();
-            }
-        }
-        private void ServoVal_Change(object sender, EventArgs e)
-        {
-            int n = (int)((TrackBar)sender).Tag;
-            tbxServo[n].Text=(trbServo[n].Value*10+1000).ToString();
-        }
-        [DllImport("ForwardSolve.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern double EndPos_X(double theta1, double theta2, double theta3, double theta4);
-        [DllImport("ForwardSolve.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern double EndPos_Y(double theta1, double theta2, double theta3, double theta4);
-        [DllImport("ForwardSolve.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern double EndPos_Z(double theta1, double theta2, double theta3, double theta4);
-        private void btnForward_Click(object sender, EventArgs e)
-        {
-            double t1 = (trbServo[0].Value - 50 )* 0.0314159265359;
-            double t2 = (trbServo[1].Value - 50 )* 0.0314159265359;
-            double t3 = (trbServo[2].Value - 50 )* 0.0314159265359;
-            double t4 = (trbServo[3].Value - 50 )* 0.0314159265359;
-            textBox1.Text = EndPos_X(t1, t2, t3, t4).ToString();
-            textBox2.Text = EndPos_Y(t1, t2, t3, t4).ToString();
-            textBox3.Text = EndPos_Z(t1, t2, t3, t4).ToString();
         }
         /*定时每秒检测端口状况*/
         private void tmrPortChk_Tick(object sender, EventArgs e)
@@ -163,7 +101,7 @@ namespace armUI
                 foreach (string port in ports)  //扫描并添加可用端口
                     cbxPort1.Items.Add(port);
                 LastPorts = ports;
-                cbxPort1.Text =  ports[0];  //默认选择第一个可用端口
+                cbxPort1.Text = ports[0];  //默认选择第一个可用端口
             }
         }
     }

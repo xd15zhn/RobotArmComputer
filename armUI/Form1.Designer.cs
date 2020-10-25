@@ -64,7 +64,7 @@
             // 
             // btnCenter
             // 
-            this.btnCenter.Location = new System.Drawing.Point(541, 12);
+            this.btnCenter.Location = new System.Drawing.Point(618, 12);
             this.btnCenter.Name = "btnCenter";
             this.btnCenter.Size = new System.Drawing.Size(107, 31);
             this.btnCenter.TabIndex = 0;
@@ -94,7 +94,7 @@
             // 
             // btnForward
             // 
-            this.btnForward.Location = new System.Drawing.Point(541, 123);
+            this.btnForward.Location = new System.Drawing.Point(618, 123);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(107, 31);
             this.btnForward.TabIndex = 0;
@@ -104,12 +104,13 @@
             // 
             // btnInverse
             // 
-            this.btnInverse.Location = new System.Drawing.Point(541, 160);
+            this.btnInverse.Location = new System.Drawing.Point(618, 160);
             this.btnInverse.Name = "btnInverse";
             this.btnInverse.Size = new System.Drawing.Size(107, 31);
             this.btnInverse.TabIndex = 0;
             this.btnInverse.Text = "逆解";
             this.btnInverse.UseVisualStyleBackColor = true;
+            this.btnInverse.Click += new System.EventHandler(this.btnInverse_Click);
             // 
             // label2
             // 
@@ -193,7 +194,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(541, 49);
+            this.btnReset.Location = new System.Drawing.Point(618, 49);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(107, 31);
             this.btnReset.TabIndex = 0;
@@ -261,7 +262,7 @@
             // 
             // btnSend1
             // 
-            this.btnSend1.Location = new System.Drawing.Point(541, 197);
+            this.btnSend1.Location = new System.Drawing.Point(618, 197);
             this.btnSend1.Name = "btnSend1";
             this.btnSend1.Size = new System.Drawing.Size(107, 31);
             this.btnSend1.TabIndex = 0;
@@ -270,12 +271,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(541, 86);
+            this.button1.Location = new System.Drawing.Point(618, 86);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 31);
             this.button1.TabIndex = 0;
             this.button1.Text = "更新";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblVersion
             // 
