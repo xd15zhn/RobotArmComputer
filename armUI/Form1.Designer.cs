@@ -49,10 +49,9 @@
             this.cbxBaudRate1 = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cbxPort1 = new System.Windows.Forms.ComboBox();
-            this.btnSend1 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.tmrPortChk = new System.Windows.Forms.Timer(this.components);
+            this.tmr200ms = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.cbxSend = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnCenter
@@ -260,16 +260,6 @@
             this.cbxPort1.Size = new System.Drawing.Size(92, 22);
             this.cbxPort1.TabIndex = 8;
             // 
-            // btnSend1
-            // 
-            this.btnSend1.Location = new System.Drawing.Point(618, 197);
-            this.btnSend1.Name = "btnSend1";
-            this.btnSend1.Size = new System.Drawing.Size(107, 31);
-            this.btnSend1.TabIndex = 0;
-            this.btnSend1.Text = "写入";
-            this.btnSend1.UseVisualStyleBackColor = true;
-            this.btnSend1.Click += new System.EventHandler(this.btnSend1_Click);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(618, 86);
@@ -289,11 +279,11 @@
             this.lblVersion.TabIndex = 13;
             this.lblVersion.Text = "label13";
             // 
-            // tmrPortChk
+            // tmr200ms
             // 
-            this.tmrPortChk.Enabled = true;
-            this.tmrPortChk.Interval = 200;
-            this.tmrPortChk.Tick += new System.EventHandler(this.tmrPortChk_Tick);
+            this.tmr200ms.Enabled = true;
+            this.tmr200ms.Interval = 200;
+            this.tmr200ms.Tick += new System.EventHandler(this.tmr200ms_Tick);
             // 
             // textBox1
             // 
@@ -301,6 +291,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
             this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "0.0000";
             // 
             // textBox2
             // 
@@ -308,6 +299,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 14;
+            this.textBox2.Text = "0.0000";
             // 
             // textBox3
             // 
@@ -315,6 +307,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 14;
+            this.textBox3.Text = "0.0000";
             // 
             // label13
             // 
@@ -353,11 +346,23 @@
             this.label16.TabIndex = 5;
             this.label16.Text = "目标点坐标";
             // 
+            // cbxSend
+            // 
+            this.cbxSend.AutoSize = true;
+            this.cbxSend.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxSend.Location = new System.Drawing.Point(618, 197);
+            this.cbxSend.Name = "cbxSend";
+            this.cbxSend.Size = new System.Drawing.Size(82, 18);
+            this.cbxSend.TabIndex = 16;
+            this.cbxSend.Text = "实时发送";
+            this.cbxSend.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 525);
+            this.Controls.Add(this.cbxSend);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -381,7 +386,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnSend1);
             this.Controls.Add(this.btnInverse);
             this.Controls.Add(this.btnForward);
             this.Controls.Add(this.button1);
@@ -418,10 +422,9 @@
         private System.Windows.Forms.ComboBox cbxBaudRate1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbxPort1;
-        private System.Windows.Forms.Button btnSend1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.Timer tmrPortChk;
+        private System.Windows.Forms.Timer tmr200ms;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
@@ -429,6 +432,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox cbxSend;
     }
 }
 
