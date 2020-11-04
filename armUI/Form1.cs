@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.IO.Ports;
 
 namespace armUI
 {
     public partial class Form1 : Form
     {
-        private const string version = "Robot Arm V1.00";
+        private const string version = "Robot Arm V1.01";
         private string[] LastPorts = { };
         private bool sp1Open;
-        private TrackBar[] trbServo = new TrackBar[8];
-        private TextBox[] tbxServo = new TextBox[8];
-        private Label[] lblServo = new Label[8];
         public Form1()
         {
             InitializeComponent();
@@ -106,6 +96,9 @@ namespace armUI
         private void tmr200ms_Tick(object sender, EventArgs e)
         {
             Timing_PortCheck();
+        }
+        private void tmr50ms_Tick(object sender, EventArgs e)
+        {
             Timing_Send();
         }
     }

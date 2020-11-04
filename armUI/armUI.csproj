@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonEvent.cs">
+    <Compile Include="task.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.cs">
