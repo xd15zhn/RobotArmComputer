@@ -7,7 +7,7 @@ namespace armUI
 {
     public partial class Form1 : Form
     {
-        private const string version = "Robot Arm V1.01";
+        private const string version = "Robot Arm V1.02";
         private string[] LastPorts = { };
         private bool sp1Open;
         public Form1()
@@ -52,6 +52,7 @@ namespace armUI
             cbxBaudRate1.Enabled = false;
             lblVersion.Text = version;
             sp1Open = true;
+            tmr50ms.Enabled = cbxSend.Checked ? true : false;
         }
         /*关闭主串口后需要完成的一系列操作*/
         private void SerialPort1_Close()
@@ -63,8 +64,10 @@ namespace armUI
             btnOpen1.Image = Properties.Resources.ledoff;
             btnOpen1.Text = "打开连接";
             sp1Open = false;
+            tmr50ms.Enabled = false;
         }
-        private void Timing_PortCheck()
+        /*200ms定时任务:定时检测端口状况*/
+        private void tmr200ms_Tick(object sender, EventArgs e)
         {
             string[] ports = SerialPort.GetPortNames();
             if (ports.Length == 0)  //没有可用端口
@@ -91,15 +94,6 @@ namespace armUI
                 LastPorts = ports;
                 cbxPort1.Text = ports[0];  //默认选择第一个可用端口
             }
-        }
-        /*200ms定时任务:定时检测端口状况,定时发送舵机角度*/
-        private void tmr200ms_Tick(object sender, EventArgs e)
-        {
-            Timing_PortCheck();
-        }
-        private void tmr50ms_Tick(object sender, EventArgs e)
-        {
-            Timing_Send();
         }
     }
 }

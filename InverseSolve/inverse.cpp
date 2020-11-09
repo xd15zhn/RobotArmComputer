@@ -29,10 +29,8 @@ int Inverse_Solve(const double position[], double theta[])
 	double costheta1, costheta2;
 	for (int i = 0; i < 4; i++)
 		ResetJoint[i] = theta[i];
-	if (r > (L2 + L3 + L4) * (L2 + L3 + L4)) {  //目标点超出工作距离
-		theta[1] = theta[2] = theta[3] = 0;
+	if (r > (L2 + L3 + L4) * (L2 + L3 + L4))  //目标点超出工作距离
 		return -1;
-	}
 	theta[0] = atan2(y, x);
 	if (abs(theta[0] - ResetJoint[0]) >= 0.7854)  //目标点方位角超出工作范围
 		return -2;
@@ -59,7 +57,9 @@ int Inverse_Solve(const double position[], double theta[])
 		if (pitch > 1.5708)
 			pitch = 0.77;
 		else if (pitch < -1.5708) {  //无可行解
-			theta[1] = theta[2] = theta[3] = 0;
+			theta[1] = ResetJoint[1];
+			theta[2] = ResetJoint[2];
+			theta[3] = ResetJoint[3];
 			return -3;
 		}
 	}

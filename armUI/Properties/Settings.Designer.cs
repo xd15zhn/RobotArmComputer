@@ -118,5 +118,17 @@ namespace armUI.Properties {
                 this["setReverse3"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int setCatchValue {
+            get {
+                return ((int)(this["setCatchValue"]));
+            }
+            set {
+                this["setCatchValue"] = value;
+            }
+        }
     }
 }
