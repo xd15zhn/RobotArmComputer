@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Windows.Forms;
 using System.IO.Ports;
+/**************文件说明**********************
+主窗体生成与关闭,串口的检测,打开与关闭
+********************************************/
 
 namespace armUI
 {
     public partial class Form1 : Form
     {
-        private const string version = "Robot Arm V1.02";
+        private const string version = "Robot Arm V1.03";
         private string[] LastPorts = { };
         private bool sp1Open;
         public Form1()
@@ -53,6 +56,7 @@ namespace armUI
             lblVersion.Text = version;
             sp1Open = true;
             tmr50ms.Enabled = cbxSend.Checked ? true : false;
+            cbxSend.Enabled = true;
         }
         /*关闭主串口后需要完成的一系列操作*/
         private void SerialPort1_Close()
@@ -65,6 +69,8 @@ namespace armUI
             btnOpen1.Text = "打开连接";
             sp1Open = false;
             tmr50ms.Enabled = false;
+            cbxSend.Checked = false;
+            cbxSend.Enabled = false;
         }
         /*200ms定时任务:定时检测端口状况*/
         private void tmr200ms_Tick(object sender, EventArgs e)

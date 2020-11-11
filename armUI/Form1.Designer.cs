@@ -66,7 +66,7 @@
             this.tmr50ms = new System.Windows.Forms.Timer(this.components);
             this.btnCatch = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.tmr500ms = new System.Windows.Forms.Timer(this.components);
+            this.lblCatchTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCenter
@@ -206,7 +206,7 @@
             this.btnOpen1.Margin = new System.Windows.Forms.Padding(2);
             this.btnOpen1.Name = "btnOpen1";
             this.btnOpen1.Size = new System.Drawing.Size(105, 32);
-            this.btnOpen1.TabIndex = 10;
+            this.btnOpen1.TabIndex = 0;
             this.btnOpen1.Text = "打开连接";
             this.btnOpen1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOpen1.UseVisualStyleBackColor = true;
@@ -219,7 +219,7 @@
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 14);
-            this.label11.TabIndex = 11;
+            this.label11.TabIndex = 0;
             this.label11.Text = "波特率";
             // 
             // cbxBaudRate1
@@ -235,7 +235,7 @@
             this.cbxBaudRate1.Margin = new System.Windows.Forms.Padding(2);
             this.cbxBaudRate1.Name = "cbxBaudRate1";
             this.cbxBaudRate1.Size = new System.Drawing.Size(92, 22);
-            this.cbxBaudRate1.TabIndex = 9;
+            this.cbxBaudRate1.TabIndex = 0;
             // 
             // label12
             // 
@@ -244,7 +244,7 @@
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 14);
-            this.label12.TabIndex = 12;
+            this.label12.TabIndex = 0;
             this.label12.Text = "端口";
             // 
             // cbxPort1
@@ -255,7 +255,7 @@
             this.cbxPort1.Margin = new System.Windows.Forms.Padding(2);
             this.cbxPort1.Name = "cbxPort1";
             this.cbxPort1.Size = new System.Drawing.Size(92, 22);
-            this.cbxPort1.TabIndex = 8;
+            this.cbxPort1.TabIndex = 0;
             // 
             // btnUpdate
             // 
@@ -273,7 +273,7 @@
             this.lblVersion.Location = new System.Drawing.Point(13, 505);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(56, 14);
-            this.lblVersion.TabIndex = 13;
+            this.lblVersion.TabIndex = 0;
             this.lblVersion.Text = "label13";
             // 
             // tmr250ms
@@ -287,7 +287,7 @@
             this.textBox1.Location = new System.Drawing.Point(836, 44);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 14;
+            this.textBox1.TabIndex = 9;
             this.textBox1.Text = "0.0000";
             // 
             // textBox2
@@ -295,7 +295,7 @@
             this.textBox2.Location = new System.Drawing.Point(836, 73);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 14;
+            this.textBox2.TabIndex = 10;
             this.textBox2.Text = "0.0000";
             // 
             // textBox3
@@ -303,7 +303,7 @@
             this.textBox3.Location = new System.Drawing.Point(836, 102);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 14;
+            this.textBox3.TabIndex = 11;
             this.textBox3.Text = "0.0000";
             // 
             // label13
@@ -350,7 +350,7 @@
             this.cbxSend.Location = new System.Drawing.Point(442, 494);
             this.cbxSend.Name = "cbxSend";
             this.cbxSend.Size = new System.Drawing.Size(82, 18);
-            this.cbxSend.TabIndex = 16;
+            this.cbxSend.TabIndex = 0;
             this.cbxSend.Text = "实时发送";
             this.cbxSend.UseVisualStyleBackColor = true;
             this.cbxSend.CheckedChanged += new System.EventHandler(this.cbxSend_CheckedChanged);
@@ -415,16 +415,21 @@
             this.label21.TabIndex = 17;
             this.label21.Text = "设置参数";
             // 
-            // tmr500ms
+            // lblCatchTime
             // 
-            this.tmr500ms.Interval = 2000;
-            this.tmr500ms.Tick += new System.EventHandler(this.tmr500ms_Tick);
+            this.lblCatchTime.AutoSize = true;
+            this.lblCatchTime.Location = new System.Drawing.Point(833, 353);
+            this.lblCatchTime.Name = "lblCatchTime";
+            this.lblCatchTime.Size = new System.Drawing.Size(14, 14);
+            this.lblCatchTime.TabIndex = 18;
+            this.lblCatchTime.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 525);
+            this.Controls.Add(this.lblCatchTime);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
@@ -508,7 +513,7 @@
         private System.Windows.Forms.Timer tmr50ms;
         private System.Windows.Forms.Button btnCatch;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Timer tmr500ms;
+        private System.Windows.Forms.Label lblCatchTime;
     }
 }
 

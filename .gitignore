@@ -1,11 +1,9 @@
 *.gitignore
 /Debug/
 /Release/
-/armUI/bin
-/armUI/obj
-/ForwardSolve/Debug/
-/ForwardSolve/Release/
-/InverseSolve/Debug/
-/InverseSolve/Release/
+/armUI/bin/
+/armUI/obj/
+/armSolve/Debug/
+/armSolve/Release/
 *.user
 .vs

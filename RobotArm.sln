@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "armUI", "armUI\armUI.csproj", "{0FCE69D3-0B32-44B6-97B9-14AACCC67ADE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InverseSolve", "InverseSolve\InverseSolve.vcxproj", "{1548BE53-9E0D-4738-856E-E3D4FC006436}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ForwardSolve", "ForwardSolve\ForwardSolve.vcxproj", "{F61A6F29-0381-416A-A70B-AD688AC776E3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "armSolve", "armSolve\armSolve.vcxproj", "{1548BE53-9E0D-4738-856E-E3D4FC006436}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,16 +39,6 @@ Global
 		{1548BE53-9E0D-4738-856E-E3D4FC006436}.Release|x64.Build.0 = Release|x64
 		{1548BE53-9E0D-4738-856E-E3D4FC006436}.Release|x86.ActiveCfg = Release|Win32
 		{1548BE53-9E0D-4738-856E-E3D4FC006436}.Release|x86.Build.0 = Release|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Debug|x64.ActiveCfg = Debug|x64
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Debug|x64.Build.0 = Debug|x64
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Debug|x86.ActiveCfg = Debug|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Debug|x86.Build.0 = Debug|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Release|Any CPU.ActiveCfg = Release|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Release|x64.ActiveCfg = Release|x64
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Release|x64.Build.0 = Release|x64
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Release|x86.ActiveCfg = Release|Win32
-		{F61A6F29-0381-416A-A70B-AD688AC776E3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
